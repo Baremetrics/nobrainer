@@ -3,7 +3,7 @@ class NoBrainer::QueryRunner::Driver < NoBrainer::QueryRunner::Middleware
     options = env[:options]
     options = options.merge(:db => RethinkDB::RQL.new.db(options[:db])) if options[:db]
 
-    RDB::Pool.instance.the_pool.with do |connection|
+    RDB::Pool.instance.with do |connection|
       env[:query].run(connection, options)
     end
   end
